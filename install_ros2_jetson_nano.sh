@@ -27,7 +27,6 @@ $ sudo apt install gazebo11 libgazebo11-dev -y
 
 # Gazebo ROS 패키지들도 설치해줍니다.
 sudo apt install ros-foxy-gazebo-ros-pkgs -y
-sudo apt install ros-foxy-rqt*
 
 # Install Colcon Build system
 sudo apt install python3-colcon-common-extensions
