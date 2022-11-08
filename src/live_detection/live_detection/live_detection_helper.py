@@ -44,8 +44,8 @@ class DetectionNode(Node):
         self.net_type = 'mb1-ssd'
         
         # Weights and labels locations
-        self.model_path = os.getenv("HOME")+ '/ros2_models/mobilenet-v1-ssd-mp-0_675.pth'
-        self.label_path = os.getenv("HOME") + '/ros2_models/voc-model-labels.txt'
+        self.model_path = '../../../model/mobilenet-v1-ssd-mp-0_675.pth'
+        self.label_path = '../../../voc-model-labels.txt'
 
         self.class_names = [name.strip() for name in open(self.label_path).readlines()]
         self.num_classes = len(self.class_names)
@@ -76,7 +76,11 @@ class DetectionNode(Node):
             box = boxes[i, :]
             label = f"{self.class_names[labels[i]]}: {probs[i]:.2f}"
             print("Object: " + str(i) + " " + label)
-            cv2.rectangle(cv_image, (box[0], box[1]), (box[2], box[3]), (255, 255, 0), 4)
+            cv2.rectangle(cv_image, 
+                          (int(box[0]), int(box[1])), 
+                          (int(box[2]), int(box[3])),
+                          (255, 255, 0),
+                          4)
 
             # Definition of 2D array message and ading all object stored in it.
             object_hypothesis_with_pose = ObjectHypothesisWithPose()
@@ -101,7 +105,7 @@ class DetectionNode(Node):
 
 
             cv2.putText(cv_image, label,
-                       (box[0]+20, box[1]+40),
+                       (int(box[0])+20, int(box[1])+40),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1,  # font scale
                        (255, 0, 255), 2)  # line type
