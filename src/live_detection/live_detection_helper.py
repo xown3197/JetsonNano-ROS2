@@ -20,17 +20,11 @@ from vision_msgs.msg import ObjectHypothesisWithPose, BoundingBox2D, Detection2D
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
 
-from live_detection.mobilenetv1_ssd import create_mobilenetv1_ssd, create_mobilenetv1_ssd_predictor
 from live_detection.misc import Timer
 
 import numpy as np
 import os
 
-# import sys
-# sys.path.append('/home/jetson/Documents/Tensorflow/models/research')
-
-
-from live_detection import inference
 from live_detection import utils
 
 print(f'==========={tf.__version__}============')
@@ -49,22 +43,12 @@ class DetectionNode(Node):
         self.detection_publisher = self.create_publisher(Detection2DArray, 'detection', 10)
 
         # Create an Image publisher for the results
-        self.result_publisher = self.create_publisher(Image,'detection_image',10)
+        # self.result_publisher = self.create_publisher(Image,'detection_image',10)
 
-        self.net_type = 'mb1-ssd'
-        
-        # Weights and labels locations
-        self.model_path = '../../../moros2del/mobilenet-v1-ssd-mp-0_675.pth'
-        
+        # Weights and labels locations        
         self.model_path = '/home/jetson/workspace/ros2/JetsonNano-ROS2/content/tmp3'
-        self.label_path = '../../../voc-model-labels.txt'
+        # self.label_path = '../../../voc-model-labels.txt'
 
-        # self.class_names = [name.strip() for name in open(self.label_path).readlines()]
-        # self.num_classes = len(self.class_names)
-        
-        # self.net = create_mobilenetv1_ssd(len(self.class_names), is_test=True)
-        # self.net.load(self.model_path)
-        # self.predictor = create_mobilenetv1_ssd_predictor(self.net, candidate_size=200)
         self.new_model = tf.saved_model.load(self.model_path)
         self.detections = self.new_model.signatures[ 'detect' ](tf.convert_to_tensor(np.ones([1,320,320,3]), dtype=tf.float32))
         print(self.detections.keys())
@@ -81,55 +65,12 @@ class DetectionNode(Node):
         
         image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
         self.timer.start()
-        # boxes, labels, probs = self.predictor.predict(image, 10, 0.4)
-        
+
         imgae, output_dict = utils.show_inference(self.new_model, img=image)
         
         interval = self.timer.end()
-        # print('Time: {:.2f}s, Detect Objects: {:d}.'.format(interval, labels.size(0)))
+
         print('Time: {:.2f}s.'.format(interval))
-
-
-        # detection_array = Detection2DArray()
-        
-        # for i in range(boxes.size(0)):
-        #     box = boxes[i, :]
-        #     label = f"{self.class_names[labels[i]]}: {probs[i]:.2f}"
-        #     print("Object: " + str(i) + " " + label)
-        #     cv2.rectangle(cv_image, 
-        #                   (int(box[0]), int(box[1])), 
-        #                   (int(box[2]), int(box[3])),
-        #                   (255, 255, 0),
-        #                   4)
-
-        #     # Definition of 2D array message and ading all object stored in it.
-        #     # object_hypothesis_with_pose = ObjectHypothesisWithPose()
-        #     # object_hypothesis_with_pose.id = str(self.class_names[labels[i]])
-        #     # object_hypothesis_with_pose.score = float(probs[i])
-
-        #     # bounding_box = BoundingBox2D()
-        #     # bounding_box.center.x = float((box[0] + box[2])/2)
-        #     # bounding_box.center.y = float((box[1] + box[3])/2)
-        #     # bounding_box.center.theta = 0.0
-            
-        #     # bounding_box.size_x = float(2*(bounding_box.center.x - box[0]))
-        #     # bounding_box.size_y = float(2*(bounding_box.center.y - box[1]))
-
-        #     # detection = Detection2D()
-        #     # detection.header = data.header
-        #     # detection.results.append(object_hypothesis_with_pose)
-        #     # detection.bbox = bounding_box
-
-        #     # detection_array.header = data.header
-        #     # detection_array.detections.append(detection)
-
-
-        #     cv2.putText(cv_image, label,
-        #                (int(box[0])+20, int(box[1])+40),
-        #                 cv2.FONT_HERSHEY_SIMPLEX,
-        #                 1,  # font scale
-        #                (255, 0, 255), 2)  # line type
-        # Displaying the predictions
 
         cv_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
         cv2.imshow('object_detection', cv_image)
