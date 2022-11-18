@@ -13,8 +13,6 @@ from six.moves import zip
 
 import cv2
 
-
-
 # from object_detection.utils import visualization_utils as viz_utils
 import tempfile
 import matplotlib.pyplot as plt

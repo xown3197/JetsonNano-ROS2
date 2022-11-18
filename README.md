@@ -17,7 +17,6 @@ $ sudo gparted
 
 ### Real-time Detection 
 
-
 '''
 # Install system packages required by TensorFlow
 $ sudo apt-get update
@@ -56,5 +55,5 @@ ros2 run image_tools cam2images
 
 terminal 2
 ```
-ros2 run live_detection live_detector
+ros2 run live_detection live_detector -P {ckpt_path}
 ```
