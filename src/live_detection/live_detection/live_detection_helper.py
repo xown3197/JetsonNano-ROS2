@@ -25,7 +25,7 @@ from live_detection.misc import Timer
 import numpy as np
 import os
 
-from live_detection.live_detection import utils
+from live_detection import utils
 
 
 class DetectionNode(Node):
