@@ -38,7 +38,9 @@ $ sudo pip3 install -U numpy==1.21.1 future==0.18.2 mock==3.0.5 keras_preprocess
 # Install Tensorflow.
 $ sudo pip3 uninstall tensorflow
 $ sudo pip3 install tensorflow
-$ sudo pip3 install numpy --upgrade
+
+$ sudo pip uninstall numpy
+$ pip install numpy --upgrade
 ```
 
 
@@ -50,10 +52,15 @@ $ ./install/local_setup.bash
 
 termainal 1
 ```
-ros2 run image_tools cam2images
+$ ros2 run image_tools cam2images
 ```
 
 terminal 2
 ```
-ros2 run live_detection live_detector -P {ckpt_path}
+$ ros2 run live_detection live_detector
+
+# (option)
+$ ros2 run live_detection live_detector -P {ckpt_path}
+or
+$ ros2 run live_detection live_detector -ckpt-path {ckpt_path}
 ```
