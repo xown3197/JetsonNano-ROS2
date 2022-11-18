@@ -40,10 +40,10 @@ class DetectionNode(Node):
         self.bridge = CvBridge()
 
         # Create a Detection 2D array topic to publish results on
-        self.detection_publisher = self.create_publisher(Detection2DArray, 'detection', 10)
+        # self.detection_publisher = self.create_publisher(Detection2DArray, 'detection', 10)
 
         # Create an Image publisher for the results
-        # self.result_publisher = self.create_publisher(Image,'detection_image',10)
+        self.result_publisher = self.create_publisher(Image,'detection_image',10)
 
         # Weights and labels locations        
         self.model_path = '/home/jetson/workspace/ros2/JetsonNano-ROS2/content/tmp3'
