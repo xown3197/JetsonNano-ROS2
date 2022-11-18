@@ -13,9 +13,9 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='rishabh',
-    maintainer_email='rchadha@nvidia.com',
-    description='ROS2 Package for live detection using PyTorch',
+    maintainer='tjkim',
+    maintainer_email='tjkim@rcv.sejong.ac.kr',
+    description='ROS2 Package for live detection using Tensorflow',
     license='MIT License',
     tests_require=['pytest'],
     entry_points={

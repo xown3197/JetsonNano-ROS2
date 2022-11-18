@@ -11,15 +11,7 @@ import argparse
 
 import rclpy
 
-from live_detection.live_detection.live_detection_helper import DetectionNode
-
-
-
-print('===================================')
-print(sys.path)
-print('===================================')
-
-# import pdb;pdb.set_trace()
+from live_detection.live_detection_helper import DetectionNode
 
 def main(args=sys.argv[1:]):
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)

@@ -3,8 +3,8 @@
 <package format="3">
   <name>live_detection</name>
   <version>0.0.0</version>
-  <description>ROS2 Package for live detection using PyTorch</description>
-  <maintainer email="rchadha@nvidia.com">rishabh</maintainer>
+  <description>ROS2 Package for live detection using Tensorflow</description>
+  <maintainer email="tjkim@rcv.sejong.ac.kr">tjkim</maintainer>
   <license>MIT License</license>
 
   <buildtool_depend>ament_python</buildtool_depend>
