@@ -38,9 +38,6 @@ class DetectionNode(Node):
         self.subscription  # prevent unused variable warning
         self.bridge = CvBridge()
 
-        # Create a Detection 2D array topic to publish results on
-        # self.detection_publisher = self.create_publisher(Detection2DArray, 'detection', 10)
-
         # Create an Image publisher for the results
         self.result_publisher = self.create_publisher(Image,'detection_image',10)
 
@@ -62,7 +59,7 @@ class DetectionNode(Node):
         image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
         self.timer.start()
 
-        imgae, output_dict = utils.show_inference(self.new_model, img=image)
+        image, output_dict = utils.show_inference(self.new_model, img=image)
         
         interval = self.timer.end()
 

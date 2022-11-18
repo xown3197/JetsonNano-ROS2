@@ -111,9 +111,9 @@ def show_inference(model, img=None, image_path=None):
   if image_path is not None:
    image_np = np.array(Image.open(image_path))
   else:
-    image_np = img
+    img = Image.fromarray(img)
     img = ImageOps.fit(img, (640, 480), Image.ANTIALIAS)
-    img = img.convert("RGB")
+    image_np = np.array(img.convert("RGB"))
 
   # Actual detection.
   output_dict = run_inference_for_single_image(model, image_np)

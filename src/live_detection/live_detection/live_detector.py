@@ -19,7 +19,7 @@ def main(args=sys.argv[1:]):
         '-P',
         '--ckpt-path',
         type=str,
-        default='../../../content/tmp3',
+        default='content/tmp3',
         help='Chekcpoint path'
         )
     parser.add_argument(
