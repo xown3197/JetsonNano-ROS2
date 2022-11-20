@@ -1,6 +1,6 @@
 # JetsonNano-ROS2
 
-### ROS2 설치
+## ROS2 설치
 ```
 $ sh ./install_ros2_jetson_nano.sh
 $ sh ./plus.sh
@@ -15,7 +15,9 @@ $ sudo apt install -y gparted
 $ sudo gparted
 ```
 
-### Real-time Detection 
+-----
+
+## Real-time Detection 
 
 ```
 # Install system packages required by TensorFlow
@@ -47,7 +49,7 @@ $ pip install numpy --upgrade
 ```
 $ source /opt/ros/foxy/setup.bash
 $ colcon build
-$ ./install/local_setup.bash
+$ source ./install/local_setup.bash
 ```
 
 termainal 1
