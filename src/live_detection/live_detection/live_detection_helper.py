@@ -43,6 +43,7 @@ class DetectionNode(Node):
 
         # Model load
         self.new_model = tf.saved_model.load(args.ckpt_path)
+        
         self.detections = self.new_model.signatures[ 'detect' ](tf.convert_to_tensor(np.ones([1,320,320,3]), dtype=tf.float32))
         print(self.detections.keys())
 
@@ -59,14 +60,15 @@ class DetectionNode(Node):
         image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
         self.timer.start()
 
+        # inference model and visualization
         image, output_dict = utils.show_inference(self.new_model, img=image)
         
         interval = self.timer.end()
-
         print('Time: {:.2f}s.'.format(interval))
-
+        
         cv_image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
         cv2.imshow('object_detection', cv_image)
+        
         # Publishing the results onto the the Detection2DArray vision_msgs format
         # self.detection_publisher.publish(detection_array)
         ros_image = self.bridge.cv2_to_imgmsg(cv_image)

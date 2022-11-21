@@ -29,13 +29,18 @@ def main(args=sys.argv[1:]):
         )
     args = parser.parse_args()
     
+    # node 초기화    
     rclpy.init(args=args.argv)
-
+    
+    # Detection node 생성
     detection_node = DetectionNode(args=args)
 
+    # node 반복 실행
     rclpy.spin(detection_node)
 
+    # detection node 제거
     detection_node.destroy_node()
+    # node 종료
     rclpy.shutdown()
 
 
