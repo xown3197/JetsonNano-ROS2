@@ -43,5 +43,5 @@ $ ros2 run live_detection live_detector
 # (option)
 $ ros2 run live_detection live_detector -P {ckpt_path}
 or
-$ ros2 run live_detection live_detector -ckpt-path {ckpt_path}
+$ ros2 run live_detection live_detector --ckpt-path {ckpt_path}
 ```
