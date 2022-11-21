@@ -1,6 +1,10 @@
 # JetsonNano-ROS2
 
 ## ROS2 설치
+<details>
+<summary> 설치 방법 </summary>
+<div markdown="1">
+
 ```
 $ sh ./install_ros2_jetson_nano.sh
 $ sh ./plus.sh
@@ -14,6 +18,8 @@ $ sudo apt update
 $ sudo apt install -y gparted
 $ sudo gparted
 ```
+</div>
+</details>
 
 -----
 
